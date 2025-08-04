@@ -1,0 +1,20 @@
+# Requirements allégés pour Vercel (sans les gros packages IA)
+Django==4.2.7
+Pillow==11.3.0
+dj-database-url==2.1.0
+psycopg2-binary==2.9.9
+whitenoise==6.6.0
+cloudinary==1.36.0
+django-cloudinary-storage==0.3.0
+django-redis==5.4.0
+gunicorn==21.2.0
+python-dotenv==1.0.0
+
+# Packages IA optionnels (décommentez si vous voulez essayer)
+# torch
+# torchvision
+# diffusers
+# transformers
+# accelerate
+# safetensors
+# huggingface-hub

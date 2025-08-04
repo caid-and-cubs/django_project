@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "name": "ai-image-generator",
+  "builds": [
+    {
+      "src": "image_generator/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9"
+      }
+    },
+    {
+      "src": "build_files.sh",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "staticfiles_build/static"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/media/(.*)",
+      "dest": "/media/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "image_generator/wsgi.py"
+    }
+  ],
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "image_generator.settings",
+    "PYTHONPATH": "."
+  },
+  "functions": {
+    "image_generator/wsgi.py": {
+      "memory": 3008,
+      "maxDuration": 30
+    }
+  },
+  "regions": ["iad1"]
+}
