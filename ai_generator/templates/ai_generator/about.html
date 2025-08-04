@@ -1,0 +1,257 @@
+{% extends 'ai_generator/base.html' %}
+
+{% block title %}À propos - AI Image Generator{% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="text-center mb-5">
+                <h1 class="display-5 fw-bold">À propos d'AI Image Generator</h1>
+                <p class="lead text-muted">Découvrez la technologie derrière notre générateur d'images IA</p>
+            </div>
+
+            <!-- Introduction -->
+            <div class="card border-0 shadow-sm mb-5">
+                <div class="card-body p-5">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h3 class="fw-bold mb-3">
+                                <i class="fas fa-magic text-primary me-2"></i>
+                                Qu'est-ce qu'AI Image Generator ?
+                            </h3>
+                            <p class="text-muted mb-0">
+                                AI Image Generator est une application web moderne qui utilise l'intelligence artificielle 
+                                pour créer des images uniques à partir de descriptions textuelles. Propulsé par le modèle 
+                                Stable Diffusion, notre générateur transforme vos idées en œuvres d'art visuelles.
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <i class="fas fa-robot text-primary" style="font-size: 4rem;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technologies -->
+            <div class="card border-0 shadow-sm mb-5">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-cogs me-2"></i>
+                        Technologies utilisées
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-success text-white rounded p-2">
+                                        <i class="fab fa-python"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fw-semibold">Django</h6>
+                                    <p class="text-muted mb-0 small">
+                                        Framework web Python pour une architecture robuste et sécurisée
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-warning text-white rounded p-2">
+                                        <i class="fas fa-fire"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fw-semibold">PyTorch</h6>
+                                    <p class="text-muted mb-0 small">
+                                        Framework de deep learning pour l'exécution des modèles IA
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-info text-white rounded p-2">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fw-semibold">Stable Diffusion</h6>
+                                    <p class="text-muted mb-0 small">
+                                        Modèle de diffusion pour la génération d'images haute qualité
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-shrink-0">
+                                    <div class="bg-primary text-white rounded p-2">
+                                        <i class="fab fa-bootstrap"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fw-semibold">Bootstrap 5</h6>
+                                    <p class="text-muted mb-0 small">
+                                        Interface utilisateur moderne et responsive
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="card border-0 shadow-sm mb-5">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-star me-2"></i>
+                        Fonctionnalités principales
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Génération d'images à partir de descriptions textuelles</span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Interface utilisateur intuitive et moderne</span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Galerie pour explorer toutes les créations</span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Téléchargement des images générées</span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Optimisation GPU pour des performances rapides</span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle text-success me-3"></i>
+                                <span>Historique complet des générations</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How it works -->
+            <div class="card border-0 shadow-sm mb-5">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-question-circle me-2"></i>
+                        Comment ça fonctionne ?
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row g-4">
+                        <div class="col-md-4 text-center">
+                            <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                 style="width: 80px; height: 80px;">
+                                <span class="fw-bold text-primary fs-3">1</span>
+                            </div>
+                            <h6 class="fw-semibold">Saisie du prompt</h6>
+                            <p class="text-muted small">
+                                Décrivez l'image que vous souhaitez créer dans le champ de texte
+                            </p>
+                        </div>
+                        
+                        <div class="col-md-4 text-center">
+                            <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                 style="width: 80px; height: 80px;">
+                                <span class="fw-bold text-primary fs-3">2</span>
+                            </div>
+                            <h6 class="fw-semibold">Traitement IA</h6>
+                            <p class="text-muted small">
+                                Le modèle Stable Diffusion analyse votre description et génère l'image
+                            </p>
+                        </div>
+                        
+                        <div class="col-md-4 text-center">
+                            <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                 style="width: 80px; height: 80px;">
+                                <span class="fw-bold text-primary fs-3">3</span>
+                            </div>
+                            <h6 class="fw-semibold">Résultat</h6>
+                            <p class="text-muted small">
+                                Votre image unique est générée et prête à être téléchargée
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tips -->
+            <div class="card border-0 shadow-sm mb-5">
+                <div class="card-header bg-warning text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-lightbulb me-2"></i>
+                        Conseils pour de meilleurs résultats
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <i class="fas fa-arrow-right text-warning me-2"></i>
+                            Soyez spécifique dans vos descriptions (couleurs, style, ambiance)
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-arrow-right text-warning me-2"></i>
+                            Utilisez des mots-clés artistiques comme "photorealistic", "digital art", "oil painting"
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-arrow-right text-warning me-2"></i>
+                            Mentionnez l'éclairage souhaité ("dramatic lighting", "soft light", "golden hour")
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-arrow-right text-warning me-2"></i>
+                            Ajoutez des qualificatifs de qualité ("high quality", "detailed", "4K")
+                        </li>
+                        <li class="mb-0">
+                            <i class="fas fa-arrow-right text-warning me-2"></i>
+                            Expérimentez avec différents styles et descriptions pour explorer les possibilités
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Call to action -->
+            <div class="text-center">
+                <a href="{% url 'ai_generator:home' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-magic me-2"></i>
+                    Commencer à créer
+                </a>
+                <a href="{% url 'ai_generator:gallery' %}" class="btn btn-outline-primary btn-lg ms-3">
+                    <i class="fas fa-images me-2"></i>
+                    Explorer la galerie
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,257 @@
+{% extends 'ai_generator/base.html' %}
+
+{% block title %}Accueil - AI Image Generator{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-100 py-5">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold text-gradient mb-4">
+                    Créez des images uniques avec l'IA
+                </h1>
+                <p class="lead text-muted mb-5">
+                    Transformez vos idées en œuvres d'art grâce à la puissance de Stable Diffusion. 
+                    Décrivez simplement ce que vous voulez voir et laissez l'intelligence artificielle créer pour vous.
+                </p>
+                
+                <!-- Status Info -->
+                <div class="alert alert-info d-flex align-items-center mb-4">
+                    <i class="fas fa-info-circle me-2"></i>
+                    <div>
+                        <strong>Statut:</strong> 
+                        {% if cuda_available %}
+                            <span class="text-success">GPU CUDA détecté ({{ device }})</span>
+                        {% else %}
+                            <span class="text-warning">Mode CPU ({{ device }})</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <!-- Generation Form -->
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">
+                            <i class="fas fa-magic me-2"></i>
+                            Générateur d'images IA
+                        </h5>
+                    </div>
+                    <div class="card-body p-4">
+                        <form id="generateForm">
+                            <div class="mb-3">
+                                <label for="prompt" class="form-label fw-semibold">
+                                    Décrivez votre image
+                                </label>
+                                <textarea 
+                                    class="form-control" 
+                                    id="prompt" 
+                                    name="prompt" 
+                                    rows="4" 
+                                    placeholder="Exemple: un astronaute qui chevauche un cheval sur Mars, style photographique, haute qualité, éclairage dramatique"
+                                    maxlength="500"
+                                    required
+                                ></textarea>
+                                <div class="form-text">
+                                    <span id="charCount">0</span>/500 caractères
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg" id="generateBtn">
+                                    <i class="fas fa-wand-magic-sparkles me-2"></i>
+                                    Générer l'image
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Loading State -->
+                        <div id="loadingState" class="text-center py-4" style="display: none;">
+                            <div class="spinner-border text-primary mb-3" role="status">
+                                <span class="visually-hidden">Génération en cours...</span>
+                            </div>
+                            <p class="text-muted">
+                                <i class="fas fa-brain me-2"></i>
+                                L'IA travaille sur votre image...
+                            </p>
+                            <small class="text-muted">Cela peut prendre quelques secondes</small>
+                        </div>
+                        
+                        <!-- Result -->
+                        <div id="resultContainer" style="display: none;">
+                            <hr>
+                            <div class="text-center">
+                                <h6 class="fw-semibold mb-3">Image générée</h6>
+                                <img id="generatedImage" class="img-fluid rounded shadow" style="max-height: 400px;">
+                                <div class="mt-3">
+                                    <small class="text-muted">
+                                        <i class="fas fa-clock me-1"></i>
+                                        Généré en <span id="generationTime">0</span> secondes
+                                    </small>
+                                </div>
+                                <div class="mt-2">
+                                    <button class="btn btn-outline-primary btn-sm" onclick="downloadImage()">
+                                        <i class="fas fa-download me-1"></i>
+                                        Télécharger
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Images Section -->
+{% if recent_images %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Images récemment générées</h2>
+            <p class="text-muted">Découvrez les dernières créations de notre communauté</p>
+        </div>
+        
+        <div class="row g-4">
+            {% for image in recent_images %}
+            <div class="col-md-4 col-lg-2">
+                <div class="card border-0 shadow-sm h-100">
+                    <img src="{{ image.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Image générée">
+                    <div class="card-body p-3">
+                        <p class="card-text small text-muted mb-2">
+                            "{{ image.prompt|truncatechars:60 }}"
+                        </p>
+                        <small class="text-muted">
+                            <i class="fas fa-clock me-1"></i>
+                            {{ image.created_at|timesince }}
+                        </small>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="{% url 'ai_generator:gallery' %}" class="btn btn-outline-primary">
+                <i class="fas fa-images me-2"></i>
+                Voir toute la galerie
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Pourquoi choisir notre générateur ?</h2>
+            <p class="text-muted">Des fonctionnalités avancées pour créer des images exceptionnelles</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4 text-center">
+                <div class="feature-icon bg-primary text-white rounded-circle mx-auto mb-3">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h5 class="fw-semibold">Génération rapide</h5>
+                <p class="text-muted">Images générées en quelques secondes grâce à l'optimisation GPU</p>
+            </div>
+            
+            <div class="col-md-4 text-center">
+                <div class="feature-icon bg-success text-white rounded-circle mx-auto mb-3">
+                    <i class="fas fa-palette"></i>
+                </div>
+                <h5 class="fw-semibold">Qualité artistique</h5>
+                <p class="text-muted">Modèle Stable Diffusion pour des images de haute qualité</p>
+            </div>
+            
+            <div class="col-md-4 text-center">
+                <div class="feature-icon bg-info text-white rounded-circle mx-auto mb-3">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h5 class="fw-semibold">Historique complet</h5>
+                <p class="text-muted">Toutes vos créations sont sauvegardées dans la galerie</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('generateForm');
+    const promptInput = document.getElementById('prompt');
+    const charCount = document.getElementById('charCount');
+    const generateBtn = document.getElementById('generateBtn');
+    const loadingState = document.getElementById('loadingState');
+    const resultContainer = document.getElementById('resultContainer');
+    
+    // Character counter
+    promptInput.addEventListener('input', function() {
+        charCount.textContent = this.value.length;
+    });
+    
+    // Form submission
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const prompt = promptInput.value.trim();
+        if (!prompt) {
+            showToast('Veuillez saisir une description pour votre image.', 'warning');
+            return;
+        }
+        
+        // Show loading state
+        generateBtn.style.display = 'none';
+        loadingState.style.display = 'block';
+        resultContainer.style.display = 'none';
+        
+        try {
+            const response = await fetch('{% url "ai_generator:generate_image" %}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prompt: prompt })
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // Show result
+                document.getElementById('generatedImage').src = data.image_url;
+                document.getElementById('generationTime').textContent = data.generation_time;
+                resultContainer.style.display = 'block';
+                
+                showToast('Image générée avec succès !', 'success');
+                
+                // Store image URL for download
+                window.currentImageUrl = data.image_url;
+            } else {
+                showToast(data.error || 'Erreur lors de la génération', 'error');
+            }
+        } catch (error) {
+            showToast('Erreur de connexion. Veuillez réessayer.', 'error');
+            console.error('Error:', error);
+        } finally {
+            // Hide loading state
+            loadingState.style.display = 'none';
+            generateBtn.style.display = 'block';
+        }
+    });
+});
+
+function downloadImage() {
+    if (window.currentImageUrl) {
+        const link = document.createElement('a');
+        link.href = window.currentImageUrl;
+        link.download = 'generated_image.png';
+        link.click();
+    }
+}
+</script>
+{% endblock %}
